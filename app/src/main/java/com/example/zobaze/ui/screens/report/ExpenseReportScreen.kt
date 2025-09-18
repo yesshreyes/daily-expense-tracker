@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.zobaze.ui.screens
+package com.example.zobaze.ui.screens.report
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -36,7 +36,6 @@ fun ExpenseReportScreen(
             .verticalScroll(rememberScrollState())
             .padding(bottom = 20.dp)
     ) {
-        // Title
         Text(
             text = "Transaction Report",
             fontSize = 22.sp,
@@ -45,7 +44,6 @@ fun ExpenseReportScreen(
             modifier = Modifier.padding(20.dp)
         )
 
-        // Mock Bar Chart
         TransactionBarGraph(
             dailyData = dailyMockData,
             categoryData = categories.map { it.category to it.total }
@@ -53,7 +51,6 @@ fun ExpenseReportScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Subheading
         Text(
             text = "Category",
             fontSize = 18.sp,
@@ -64,7 +61,6 @@ fun ExpenseReportScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Category cards grid-like layout
         FlowRow(
             modifier = Modifier
                 .fillMaxWidth()

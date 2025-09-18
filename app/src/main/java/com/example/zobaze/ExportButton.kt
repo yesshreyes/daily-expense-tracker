@@ -26,7 +26,6 @@ fun ExportButton(categories: List<CategoryReport>) {
 
     Button(
         onClick = {
-            // Build CSV from your categories
             val csvData = buildString {
                 append("Category,Amount\n")
                 categories.forEach { report ->
@@ -34,18 +33,15 @@ fun ExportButton(categories: List<CategoryReport>) {
                 }
             }
 
-            // Save CSV file in cache
             val file = File(context.cacheDir, "transactions.csv")
             file.writeText(csvData)
 
-            // Get URI with FileProvider
             val uri = FileProvider.getUriForFile(
                 context,
                 "${context.packageName}.provider",
                 file
             )
 
-            // Share intent
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/csv"
                 putExtra(Intent.EXTRA_STREAM, uri)

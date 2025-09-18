@@ -17,7 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.zobaze.ui.components.ZobazeTopBar
 import com.example.zobaze.ui.screens.entry.ExpenseEntryScreen
 import com.example.zobaze.ui.screens.list.ExpenseListScreen
-import com.example.zobaze.ui.screens.ExpenseReportScreen
+import com.example.zobaze.ui.screens.report.ExpenseReportScreen
 import com.example.zobaze.ui.screens.entry.ExpenseEntryViewModel
 import com.example.zobaze.ui.screens.list.ExpenseListViewModel
 import com.example.zobaze.ui.theme.SecondaryColor
