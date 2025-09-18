@@ -1,4 +1,4 @@
-package com.example.zobaze.ui.data
+package com.example.zobaze.ui.data.model
 
 data class CategoryReport(
     val category: String,

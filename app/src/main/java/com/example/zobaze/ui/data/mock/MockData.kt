@@ -1,4 +1,6 @@
-package com.example.zobaze.ui.data
+package com.example.zobaze.ui.data.mock
+
+import com.example.zobaze.ui.data.model.CategoryReport
 
 val sampleCategoryReports = listOf(
     CategoryReport("Food", 2100.0),

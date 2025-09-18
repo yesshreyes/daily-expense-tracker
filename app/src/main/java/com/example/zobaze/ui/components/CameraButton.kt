@@ -25,11 +25,9 @@ import com.example.zobaze.ui.theme.SecondaryColor
 fun CameraButton() {
     val context = LocalContext.current
 
-    // Launcher to pick an image
     val pickImageLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
-        // uri is the selected image
         if (uri != null) {
             Toast.makeText(context, "Image uploaded", Toast.LENGTH_SHORT).show()
         }
@@ -42,7 +40,6 @@ fun CameraButton() {
         shape = RoundedCornerShape(14.dp),
         colors = CardDefaults.cardColors(containerColor = PrimaryColor),
         onClick = {
-            // Open gallery to pick an image
             pickImageLauncher.launch("image/*")
         }
     ) {

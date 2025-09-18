@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.zobaze.R
-import com.example.zobaze.ui.screens.SourceSansProFamily
 import com.example.zobaze.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,7 +39,6 @@ fun ZobazeTopBar(
                 )
                 Text(
                     text = title,
-                    fontFamily = SourceSansProFamily,
                     fontWeight = FontWeight.Bold,
                     fontSize = 28.sp,
                     color = PrimaryColor

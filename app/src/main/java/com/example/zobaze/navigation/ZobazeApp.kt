@@ -15,10 +15,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.zobaze.ui.components.ZobazeTopBar
-import com.example.zobaze.ui.screens.ExpenseEntryScreen
-import com.example.zobaze.ui.screens.ExpenseListScreen
+import com.example.zobaze.ui.screens.entry.ExpenseEntryScreen
+import com.example.zobaze.ui.screens.list.ExpenseListScreen
 import com.example.zobaze.ui.screens.ExpenseReportScreen
-import com.example.zobaze.ui.screens.ExpenseViewModel
+import com.example.zobaze.ui.screens.entry.ExpenseEntryViewModel
+import com.example.zobaze.ui.screens.list.ExpenseListViewModel
 import com.example.zobaze.ui.theme.SecondaryColor
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -28,8 +29,8 @@ fun ZobazeApp(
     onThemeToggle: () -> Unit
 ) {
     val navController = rememberNavController()
-    val viewModel: ExpenseViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
-
+    val entryViewModel: ExpenseEntryViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    val listViewModel: ExpenseListViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
     var currentRoute by remember { mutableStateOf(Screen.ExpenseEntry.route) }
 
     Scaffold(
@@ -56,11 +57,11 @@ fun ZobazeApp(
             ) {
                 composable(Screen.ExpenseEntry.route) {
                     currentRoute = Screen.ExpenseEntry.route
-                    ExpenseEntryScreen(viewModel)
+                    ExpenseEntryScreen(entryViewModel)
                 }
                 composable(Screen.ExpenseList.route) {
                     currentRoute = Screen.ExpenseList.route
-                    ExpenseListScreen(viewModel)
+                    ExpenseListScreen(listViewModel)
                 }
                 composable(Screen.ExpenseReport.route) {
                     currentRoute = Screen.ExpenseReport.route

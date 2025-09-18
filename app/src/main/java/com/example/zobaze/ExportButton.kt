@@ -15,8 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.FileProvider
-import com.example.zobaze.ui.data.CategoryReport
-import com.example.zobaze.ui.screens.SourceSansProFamily
+import com.example.zobaze.ui.data.model.CategoryReport
 import com.example.zobaze.ui.theme.PrimaryColor
 import com.example.zobaze.ui.theme.SecondaryColor
 import java.io.File
@@ -65,7 +64,6 @@ fun ExportButton(categories: List<CategoryReport>) {
             "Export",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            fontFamily = SourceSansProFamily,
             color = PrimaryColor
         )
     }
