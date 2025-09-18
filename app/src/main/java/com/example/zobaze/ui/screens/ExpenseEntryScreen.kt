@@ -27,6 +27,8 @@ import android.widget.Toast
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import com.example.zobaze.ui.components.CameraButton
 import com.example.zobaze.ui.theme.*
 import kotlinx.coroutines.delay
@@ -53,8 +55,9 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+                .padding(24.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             Card(
                 modifier = Modifier
@@ -70,8 +73,7 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp),
+                        .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(

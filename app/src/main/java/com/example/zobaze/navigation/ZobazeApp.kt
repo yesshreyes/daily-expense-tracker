@@ -11,7 +11,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,7 +19,6 @@ import com.example.zobaze.ui.screens.ExpenseEntryScreen
 import com.example.zobaze.ui.screens.ExpenseListScreen
 import com.example.zobaze.ui.screens.ExpenseReportScreen
 import com.example.zobaze.ui.screens.ExpenseViewModel
-import com.example.zobaze.ui.theme.PrimaryColor
 import com.example.zobaze.ui.theme.SecondaryColor
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -35,7 +33,7 @@ fun ZobazeApp(
     var currentRoute by remember { mutableStateOf(Screen.ExpenseEntry.route) }
 
     Scaffold(
-        containerColor = PrimaryColor,
+        containerColor = SecondaryColor,
         topBar = {
             ZobazeTopBar(
                 title = "Zobaze",
