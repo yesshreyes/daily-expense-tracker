@@ -31,7 +31,7 @@ import com.example.zobaze.ui.components.CameraButton
 import com.example.zobaze.ui.theme.*
 import kotlinx.coroutines.delay
 
-val SourceSansProFamily = FontFamily.Default // Replace with actual font when added
+val SourceSansProFamily = FontFamily.Default
 
 @Composable
 fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
@@ -56,7 +56,6 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                 .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            // Total Spent Card
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -92,8 +91,6 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                     )
                 }
             }
-
-            // Transaction Input
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -121,7 +118,7 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     FloatingActionButton(
-                        onClick = { /* Handle cart */ },
+                        onClick = { },
                         modifier = Modifier.size(56.dp),
                         containerColor = SecondaryColor,
                         shape = CircleShape
@@ -136,7 +133,6 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                 }
             }
 
-            // Category Dropdown
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -189,7 +185,6 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                 }
             }
 
-            // Debit/Credit Switch
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -205,7 +200,16 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text("Debit")
-                    Switch(checked = isCredit, onCheckedChange = { isCredit = it })
+                    Switch(
+                        checked = isCredit,
+                        onCheckedChange = { isCredit = it },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = SuccessGreen,
+                            uncheckedThumbColor = ErrorRed,
+                            checkedTrackColor = SuccessGreen.copy(alpha = 0.5f),
+                            uncheckedTrackColor = ErrorRed.copy(alpha = 0.5f)
+                        )
+                    )
                     Text("Credit")
                 }
                 Row(
@@ -236,7 +240,6 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                 }
             }
 
-            // Notes
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -263,7 +266,6 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Submit + Camera Button
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -288,7 +290,7 @@ fun ExpenseEntryScreen(viewModel: ExpenseViewModel) {
                 CameraButton()
             }
         }
-        // Success Animation Overlay
+
         if (showSuccessAnimation) {
             val scale = remember { Animatable(0f) }
             LaunchedEffect(Unit) {
