@@ -48,13 +48,7 @@ fun ExpenseEntryScreen(
     var expanded by remember { mutableStateOf(false) }
     var showSuccessAnimation by remember { mutableStateOf(false) }
 
-    val colors = MaterialTheme.colorScheme
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colors.background)
-    ) {
+    Box(modifier = Modifier.fillMaxSize().background(BackgroundGradient)) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -62,20 +56,13 @@ fun ExpenseEntryScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
-            // Total Spent Card (glass effect)
+            // Total Spent Card
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .shadow(
-                        6.dp,
-                        RoundedCornerShape(16.dp),
-                        spotColor = colors.secondary.copy(alpha = 0.15f),
-                        ambientColor = colors.secondary.copy(alpha = 0.08f)
-                    ),
+                    .shadow(6.dp, RoundedCornerShape(16.dp), spotColor = ShadowMedium, ambientColor = ShadowLight),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = colors.surface.copy(alpha = 0.5f) // semi-transparent for glass effect
-                )
+                colors = CardDefaults.cardColors(containerColor = GlassColor)
             ) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
@@ -84,7 +71,7 @@ fun ExpenseEntryScreen(
                     Text(
                         "Total Spent Today",
                         fontSize = 16.sp,
-                        color = colors.onBackground,
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.Medium
                     )
                     Spacer(Modifier.height(8.dp))
@@ -92,50 +79,43 @@ fun ExpenseEntryScreen(
                         "₹ ${"%.2f".format(totalSpent)}",
                         fontSize = 32.sp,
                         fontWeight = FontWeight.Bold,
-                        color = colors.primary
+                        color = SecondaryColor
                     )
                 }
             }
 
-            // Transaction input
             Card(
                 modifier = Modifier.fillMaxWidth().shadow(8.dp, RoundedCornerShape(12.dp)),
-                colors = CardDefaults.cardColors(containerColor = colors.surface)
+                colors = CardDefaults.cardColors(containerColor = PrimaryColor)
             ) {
-                Row(
-                    Modifier.fillMaxWidth().padding(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Row(Modifier.fillMaxWidth().padding(4.dp), verticalAlignment = Alignment.CenterVertically) {
                     OutlinedTextField(
                         value = uiState.title,
                         onValueChange = { entryViewModel.onTitleChange(it) },
                         label = { Text("Add transactions") },
                         modifier = Modifier.weight(1f),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = colors.primary,
-                            unfocusedBorderColor = colors.onSurface.copy(alpha = 0.3f),
-                            textColor = colors.onSurface,
-                            cursorColor = colors.primary
+                            focusedBorderColor = BorderFocused,
+                            unfocusedBorderColor = BorderLight
                         ),
                         shape = RoundedCornerShape(12.dp),
-                        textStyle = TextStyle(color = colors.onSurface)
+                        textStyle = TextStyle()
                     )
                     Spacer(Modifier.width(8.dp))
                     FloatingActionButton(
                         onClick = { },
                         modifier = Modifier.size(56.dp),
-                        containerColor = colors.primary,
+                        containerColor = SecondaryColor,
                         shape = CircleShape
                     ) {
-                        Icon(Icons.Default.ShoppingCart, contentDescription = "Cart", tint = colors.onPrimary)
+                        Icon(Icons.Default.ShoppingCart, contentDescription = "Cart", tint = PrimaryColor)
                     }
                 }
             }
 
-            // Category dropdown
             Card(
                 modifier = Modifier.fillMaxWidth().shadow(8.dp, RoundedCornerShape(12.dp)),
-                colors = CardDefaults.cardColors(containerColor = colors.surface)
+                colors = CardDefaults.cardColors(containerColor = PrimaryColor)
             ) {
                 ExposedDropdownMenuBox(
                     expanded = expanded,
@@ -146,12 +126,11 @@ fun ExpenseEntryScreen(
                         value = uiState.category,
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Category", color = colors.onSurface) },
+                        label = { Text("Category") },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = colors.primary,
-                            unfocusedBorderColor = colors.onSurface.copy(alpha = 0.3f),
-                            textColor = colors.onSurface
+                            focusedBorderColor = BorderFocused,
+                            unfocusedBorderColor = BorderLight
                         ),
                         modifier = Modifier.menuAnchor().fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
@@ -160,7 +139,7 @@ fun ExpenseEntryScreen(
                     ExposedDropdownMenu(expanded, { expanded = false }) {
                         categories.forEach { category ->
                             DropdownMenuItem(
-                                text = { Text(category, color = colors.onSurface, fontWeight = FontWeight.Medium) },
+                                text = { Text(category, color = TextPrimary, fontWeight = FontWeight.Medium) },
                                 onClick = {
                                     entryViewModel.onCategorySelected(category)
                                     expanded = false
@@ -171,10 +150,9 @@ fun ExpenseEntryScreen(
                 }
             }
 
-            // Credit/Debit toggle
             Card(
                 modifier = Modifier.fillMaxWidth().shadow(8.dp, RoundedCornerShape(12.dp)),
-                colors = CardDefaults.cardColors(containerColor = colors.surface)
+                colors = CardDefaults.cardColors(containerColor = PrimaryColor)
             ) {
                 Column {
                     Row(
@@ -182,65 +160,60 @@ fun ExpenseEntryScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text("Debit", color = colors.onSurface)
+                        Text("Debit")
                         Switch(
                             checked = uiState.isCredit,
                             onCheckedChange = { entryViewModel.onCreditToggle(it) },
                             colors = SwitchDefaults.colors(
-                                checkedThumbColor = colors.secondary,
-                                uncheckedThumbColor = colors.error,
-                                checkedTrackColor = colors.secondary.copy(alpha = 0.5f),
-                                uncheckedTrackColor = colors.error.copy(alpha = 0.5f)
+                                checkedThumbColor = SuccessGreen,
+                                uncheckedThumbColor = ErrorRed,
+                                checkedTrackColor = SuccessGreen.copy(alpha = 0.5f),
+                                uncheckedTrackColor = ErrorRed.copy(alpha = 0.5f)
                             )
                         )
-                        Text("Credit", color = colors.onSurface)
+                        Text("Credit")
                     }
 
                     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text("₹", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = colors.primary)
+                        Text("₹", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = SecondaryColor)
                         Spacer(Modifier.width(8.dp))
                         OutlinedTextField(
                             value = uiState.amount,
                             onValueChange = { entryViewModel.onAmountChange(it) },
-                            placeholder = { Text("0", color = colors.onSurface.copy(alpha = 0.5f)) },
+                            placeholder = { Text("0", color = TextHint) },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                             modifier = Modifier.fillMaxWidth(),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = colors.primary,
-                                unfocusedBorderColor = colors.onSurface.copy(alpha = 0.3f),
-                                textColor = colors.onSurface,
-                                cursorColor = colors.primary
+                                focusedBorderColor = BorderFocused,
+                                unfocusedBorderColor = BorderLight
                             ),
                             shape = RoundedCornerShape(12.dp),
-                            textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium, color = colors.onSurface)
+                            textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium)
                         )
                     }
                 }
             }
 
-            // Notes
             Card(
                 modifier = Modifier.fillMaxWidth().shadow(8.dp, RoundedCornerShape(12.dp)),
-                colors = CardDefaults.cardColors(containerColor = colors.surface)
+                colors = CardDefaults.cardColors(containerColor = SurfaceGrey)
             ) {
                 OutlinedTextField(
                     value = uiState.notes,
                     onValueChange = { entryViewModel.onNotesChange(it) },
-                    placeholder = { Text("Add note (optional)", color = colors.onSurface.copy(alpha = 0.5f)) },
+                    placeholder = { Text("Add note (optional)", color = TextTertiary) },
                     modifier = Modifier.fillMaxWidth().padding(4.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color.Transparent,
-                        unfocusedBorderColor = Color.Transparent,
-                        textColor = colors.onSurface
+                        unfocusedBorderColor = Color.Transparent
                     ),
                     shape = RoundedCornerShape(12.dp),
-                    supportingText = { Text("${uiState.notes.length}/100", color = colors.onSurface.copy(alpha = 0.5f), fontSize = 12.sp) }
+                    supportingText = { Text("${uiState.notes.length}/100", color = TextTertiary, fontSize = 12.sp) }
                 )
             }
 
             Spacer(Modifier.height(10.dp))
 
-            // Submit + Camera button
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Button(
                     onClick = {
@@ -254,16 +227,15 @@ fun ExpenseEntryScreen(
                         }
                     },
                     modifier = Modifier.weight(1f).height(56.dp).shadow(8.dp, RoundedCornerShape(14.dp)),
-                    colors = ButtonDefaults.buttonColors(containerColor = colors.primary),
+                    colors = ButtonDefaults.buttonColors(containerColor = SecondaryColor),
                     shape = RoundedCornerShape(14.dp)
                 ) {
-                    Text("Submit", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = colors.onPrimary)
+                    Text("Submit", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = PrimaryColor)
                 }
                 CameraButton()
             }
         }
 
-        // Success animation overlay
         if (showSuccessAnimation) {
             val scale = remember { Animatable(0f) }
             LaunchedEffect(Unit) {
@@ -276,12 +248,12 @@ fun ExpenseEntryScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = colors.onBackground.copy(alpha = 0.5f))
+                        .background(color = Color.Black.copy(alpha = 0.5f))
                 )
                 Icon(
                     imageVector = Icons.Default.CheckCircle,
                     contentDescription = "Success",
-                    tint = colors.secondary,
+                    tint = SuccessGreen,
                     modifier = Modifier
                         .size(80.dp)
                         .graphicsLayer(
@@ -292,5 +264,6 @@ fun ExpenseEntryScreen(
                 )
             }
         }
+
     }
 }
