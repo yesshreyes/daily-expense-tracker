@@ -25,6 +25,7 @@ import com.example.zobaze.ui.data.model.CategoryReport
 import com.example.zobaze.ui.data.mock.dailyMockData
 import com.example.zobaze.ui.theme.*
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ExpenseReportScreen(
     categories: List<CategoryReport> = sampleCategoryReports
