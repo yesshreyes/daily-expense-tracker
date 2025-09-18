@@ -1,6 +1,5 @@
 package com.example.zobaze.ui.screens.entry
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.zobaze.ui.data.model.Expense
 import com.example.zobaze.ui.data.repository.ExpenseRepository
