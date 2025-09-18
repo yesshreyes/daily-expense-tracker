@@ -2,8 +2,6 @@
 
 package com.example.zobaze.ui.screens
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.FlowRow
@@ -22,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.zobaze.ExportButton
 import com.example.zobaze.ui.components.TransactionBarGraph
-import com.example.zobaze.ui.data.sampleCategoryReports
-import com.example.zobaze.ui.data.CategoryReport
-import com.example.zobaze.ui.data.dailyMockData
+import com.example.zobaze.ui.data.mock.sampleCategoryReports
+import com.example.zobaze.ui.data.model.CategoryReport
+import com.example.zobaze.ui.data.mock.dailyMockData
 import com.example.zobaze.ui.theme.*
 
 @Composable
@@ -42,7 +40,6 @@ fun ExpenseReportScreen(
         Text(
             text = "Transaction Report",
             fontSize = 22.sp,
-            fontFamily = SourceSansProFamily,
             fontWeight = FontWeight.Bold,
             color = TextPrimary,
             modifier = Modifier.padding(20.dp)
@@ -60,7 +57,6 @@ fun ExpenseReportScreen(
         Text(
             text = "Category",
             fontSize = 18.sp,
-            fontFamily = SourceSansProFamily,
             fontWeight = FontWeight.Medium,
             color = TextPrimary,
             modifier = Modifier.padding(horizontal = 20.dp)
@@ -92,7 +88,6 @@ fun ExpenseReportScreen(
                             text = report.category,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium,
-                            fontFamily = SourceSansProFamily,
                             color = TextPrimary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
@@ -100,7 +95,6 @@ fun ExpenseReportScreen(
                             text = "₹ ${report.total}",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
-                            fontFamily = SourceSansProFamily,
                             color = SecondaryColor
                         )
                     }

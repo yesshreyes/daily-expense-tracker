@@ -12,12 +12,11 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
-import com.example.zobaze.ui.screens.SourceSansProFamily
 import com.example.zobaze.ui.theme.*
 
 @Composable
 fun ExpenseItem(
-    expense: com.example.zobaze.ui.screens.Expense,
+    expense: com.example.zobaze.ui.data.model.Expense,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -37,7 +36,6 @@ fun ExpenseItem(
                 Text(
                     text = expense.title,
                     fontWeight = FontWeight.Bold,
-                    fontFamily = SourceSansProFamily,
                     fontSize = 16.sp,
                     color = TextPrimary
                 )
@@ -46,7 +44,6 @@ fun ExpenseItem(
                     text = expense.category,
                     fontSize = 12.sp,
                     color = TextSecondary,
-                    fontFamily = SourceSansProFamily
                 )
             }
 
@@ -56,7 +53,6 @@ fun ExpenseItem(
                 text = "$sign₹${"%.2f".format(expense.amount)}",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = SourceSansProFamily,
                 color = color
             )
         }

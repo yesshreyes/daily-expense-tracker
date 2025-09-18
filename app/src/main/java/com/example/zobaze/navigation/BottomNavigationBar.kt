@@ -41,7 +41,6 @@ fun BottomNavigationBar(
     ) {
         items.forEach { screen ->
             val selected = screen.route == currentRoute
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
